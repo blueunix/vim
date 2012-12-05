@@ -1,0 +1,1 @@
+/home/zhaojianxiang/.vim/bundle/markdown/syntax/mkd.vim

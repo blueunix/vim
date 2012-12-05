@@ -1,0 +1,106 @@
+# Global snippets
+
+# (c) holds no legal value ;)
+snippet c)
+	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
+snippet date
+	`strftime("%Y-%m-%d")`
+
+#
+# LTE TDD testbed snippets
+#
+
+# Log items
+snippet _error
+	LogItem ${1:xxx}_error(TRACEGROUP, "$1_error", 3, 3);
+snippet error(
+	${1:xxx}_error(FILELINE, "${2}");
+snippet _warning
+	LogItem ${1:xxx}_warning(TRACEGROUP, "$1_warning", 3, 3);
+snippet warning(
+	${1:xxx}_warning(FILELINE, "${2}");
+snippet _info
+	LogItem ${1:xxx}_info(TRACEGROUP, "$1_info", 3, 3);
+snippet info(
+	${1:xxx}_info(FILELINE, "${2}");
+snippet _debug
+	LogItem ${1:xxx}_debug(TRACEGROUP, "$1_debug", 0, 0);
+snippet debug(
+	${1:xxx}_debug(FILELINE, "${2}");
+snippet _trace
+	LogItem ${1:xxx}_trace(TRACEGROUP, "$1_trace", 0, 0);
+snippet trace(
+	${1:xxx}_trace(FILELINE, "${2}");
+snippet _dump
+	LogItem ${1:xxx}_dump(TRACEGROUP, "$1_dump", 0, 0);
+snippet dump(
+	${1:xxx}_dump(FILELINE, "${2}%s", hexdump(${3}));
+snippet fsmdcl
+	class ${1:} : public ProcedureFSM {
+		public:
+			$1();
+			virtual ~$1();
+
+		public:
+			// Implements Procedure::name()
+			virtual const char* name() const;
+
+		protected:
+			// Transitions
+	};
+snippet fsmdef
+	// States
+	enum {
+		S_IDLE = 0,
+		S_END
+	};
+	
+	// Procedure internal events
+	enum {
+		EID_XXX = EID_INTERNAL_MIN,
+	};
+
+	${1:}::$1() :
+		ProcedureFSM()
+	{
+		// Set initial state
+		setState(S_IDLE);
+
+		// Dump FSM
+		dumpFSM();
+	}
+
+	$1::~$1()
+	{
+	}
+
+	const char* $1::name() const
+	{
+		return "$1";
+	}
+snippet fsmat
+	fsmAddEventTrans(${1:S_CURR}, ${2:EID_},
+	    ${3:transition},
+	    ${4:S_NEXT}, ${5:Procedure::RC_});
+
+# Doxygen comments
+snippet dxcopy
+	/*---------------------------------------------------------------------------*/
+	/*                                                                           */
+	/*     Copyright (c) ERICSSON AB, 2008                                       */
+	/*                                                                           */
+	/*     The copyright to the document(s) herein is the property of            */
+	/*     Ericsson AB, Sweden.                                                  */
+	/*                                                                           */
+	/*     The document(s) may be used and/or copied only with the written       */
+	/*     permission from Ericsson AB or in accordance                          */
+	/*     with the terms and conditions stipulated in the agreement contract    */
+	/*     under which the document(s) have been supplied.                       */
+	/*                                                                           */
+	/*---------------------------------------------------------------------------*/
+snippet dxfile
+	/*!
+	 * \file   ${1:`Filename('')`}
+	 * \brief  ${2}
+	 * \author ${3:`g:snips_author`}
+	 */
