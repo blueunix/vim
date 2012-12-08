@@ -1,0 +1,2 @@
+markdown-1.2.2.vba: call delete('/home/zhaojianxiang/.vim/ftdetect/markdown.vim')|call delete('/home/zhaojianxiang/.vim/snippets/markdown.snippets')|call delete('/home/zhaojianxiang/.vim/syntax/markdown.vim')
+supertab.vba: call delete('/home/zhaojianxiang/.vim/doc/supertab.txt')|call delete('/home/zhaojianxiang/.vim/plugin/supertab.vim')
