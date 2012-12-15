@@ -232,6 +232,30 @@ set showcmd
 "nmap <C-l> <C-W>l
 
 
+
+
+""""""""""""""""""""""""""""""
+" crefvim
+""""""""""""""""""""""""""""""
+
+"" <Leader>cr normal mode:  get help for word under cursor 
+""                           Memory aid cr: (c)-(r)eference 
+""  <Leader>cr visual mode:  get help for visually selected text 
+""                           Memory aid cr: (c)-(r)eference 
+""  <Leader>cw:              prompt for word CRefVim should search for 
+""                           Memory aid cw: (c)-reference (w)hat 
+""  <Leader>cc:              jump to table of contents of the C-reference manual 
+""                           Memory aid cc: (c)-reference (c)ontents 
+
+
+""""""""""""""""""""""""""""""
+" tagbar
+""""""""""""""""""""""""""""""
+nmap <Leader>tb :TagbarToggle<CR>
+let g:tagbar_ctags_bin='/usr/bin/ctags'
+let g:tagbar_width=30
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
+
 """"""""""""""""""""""""""""""
 " showmarks setting
 """"""""""""""""""""""""""""""
@@ -300,8 +324,8 @@ syntax on
 highlight ColorColumn ctermbg=grey
 highlight ColorColumn ctermfg=grey
 "colorscheme darkblue 
-colorscheme inkpot 
-
+"colorscheme inkpot 
+colorscheme candycode
 
 "
 " Undo history
@@ -563,6 +587,15 @@ let g:snips_author='Ying YIN'
 
 
 """"""""""""""""""""""""""""""
+" author info
+""""""""""""""""""""""""""""""
+let g:vimrc_author='Jianxiang' 
+let g:vimrc_email='seuzhaojx@gmail.com' 
+let g:vimrc_homepage='www.vim.org' 
+nmap <C-a> :AuthorInfoDetect<cr>
+
+
+""""""""""""""""""""""""""""""
 " mark setting
 """"""""""""""""""""""""""""""
 nmap <silent> <leader>hl <Plug>MarkSet
@@ -623,7 +656,7 @@ set tags+=/home/zhaojianxiang/TestTimer/os/source/tags
 
 
 set updatetime=1000
-colo elflord
+"colo elflord
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " start commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
