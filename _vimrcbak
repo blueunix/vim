@@ -73,8 +73,8 @@ set showcmd
 "nmap <silent> <leader>qa :qa<cr>
 
 
-""Fast remove highlight search
-"nmap <silent> <leader><cr> :noh<cr>
+"Fast remove highlight search
+nmap <silent> <leader><cr> :noh<cr>
 
 ""Fast redraw
 "nmap <silent> <leader>rr :redraw!<cr>
@@ -93,36 +93,36 @@ set showcmd
         "let tab = 1
         "while tab <= tabpagenr("$")
             "let bufwinnr = bufwinnr(a:filename)
-            "if bufwinnr != -1
-                "exec "normal " . tab . "gt"
-                "exec bufwinnr . "wincmd w"
-                "return
-            "endif
-            "tabnext
-            "let tab = tab + 1
-        "endwhile
-        "" not exist, new tab
-        "exec "tabnew " . a:filename
-    "endif
+          "if bufwinnr != -1
+              "exec "normal " . tab . "gt"
+              "exec bufwinnr . "wincmd w"
+              "return
+          "endif
+          "tabnext
+          "let tab = tab + 1
+      "endwhile
+      "" not exist, new tab
+      "exec "tabnew " . a:filename
+  "endif
 "endfunction
 
 ""Fast edit vimrc
 "if MySys() == 'linux'
-    ""Fast reloading of the .vimrc
-    "map <silent> <leader>ss :source ~/.vimrc<cr>
-    ""Fast editing of .vimrc
-    "map <silent> <leader>ee :call SwitchToBuf("~/.vimrc")<cr>
-    ""When .vimrc is edited, reload it
-    ""autocmd! bufwritepost .vimrc source ~/.vimrc
+  ""Fast reloading of the .vimrc
+  "map <silent> <leader>ss :source ~/.vimrc<cr>
+  ""Fast editing of .vimrc
+  "map <silent> <leader>ee :call SwitchToBuf("~/.vimrc")<cr>
+  ""When .vimrc is edited, reload it
+  ""autocmd! bufwritepost .vimrc source ~/.vimrc
 "elseif MySys() == 'windows'
-    "" Set helplang
-    "set helplang=cn
-    ""Fast reloading of the _vimrc
-    "map <silent> <leader>ss :source ~/_vimrc<cr>
-    ""Fast editing of _vimrc
-    "map <silent> <leader>ee :call SwitchToBuf("~/_vimrc")<cr>
-    ""When _vimrc is edited, reload it
-    "autocmd! bufwritepost _vimrc source ~/_vimrc
+  "" Set helplang
+  "set helplang=cn
+  ""Fast reloading of the _vimrc
+  "map <silent> <leader>ss :source ~/_vimrc<cr>
+  ""Fast editing of _vimrc
+  "map <silent> <leader>ee :call SwitchToBuf("~/_vimrc")<cr>
+  ""When _vimrc is edited, reload it
+  "autocmd! bufwritepost _vimrc source ~/_vimrc
 "endif
 
 
@@ -155,9 +155,6 @@ set showcmd
 ""The commandbar is 2 high
 "set cmdheight=2
 
-""Show line number
-"set nu
-
 ""Do not redraw, when running macros.. lazyredraw
 "set lz
 
@@ -171,50 +168,35 @@ set showcmd
 ""set whichwrap+=<,>,h,l
 "set whichwrap+=<,>
 
-""Ignore case when searching
-""set ignorecase
-
-""Include search
-"set incsearch
-
-""Highlight search things
-"set hlsearch
-
-""Set magic on
-"set magic
-
 ""No sound on errors.
 ""set noerrorbells
 ""set novb t_vb=
-
-""show matching bracets
-"set showmatch
 
 ""How many tenths of a second to blink
 ""set mat=2
 
 
-"""""""""""""""""""""""""""""""
-"" Visual
-"""""""""""""""""""""""""""""""
-"" From an idea by Michael Naumann
-"function! VisualSearch(direction) range
-  "let l:saved_reg = @"
-  "execute "normal! vgvy"
-  "let l:pattern = escape(@", '\\/.*$^~[]')
-  "let l:pattern = substitute(l:pattern, "\n$", "", "")
-  "if a:direction == 'b'
-    "execute "normal ?" . l:pattern . "^M"
-  "else
-    "execute "normal /" . l:pattern . "^M"
-  "endif
-  "let @/ = l:pattern
-  "let @" = l:saved_reg
-"endfunction
+""""""""""""""""""""""""""""""
+" Visual
+""""""""""""""""""""""""""""""
+" From an idea by Michael Naumann
+function! VisualSearch(direction) range
+let l:saved_reg = @"
+execute "normal! vgvy"
+let l:pattern = escape(@", '\\/.*$^~[]')
+let l:pattern = substitute(l:pattern, "\n$", "", "")
+if a:direction == 'b'
+  execute "normal ?" . l:pattern . "^M"
+else
+  execute "normal /" . l:pattern . "^M"
+endif
+let @/ = l:pattern
+let @" = l:saved_reg
+endfunction
 
-""Basically you press * or # to search for the current selection !! Really useful
-"vnoremap <silent> * :call VisualSearch('f')<CR>
-"vnoremap <silent> # :call VisualSearch('b')<CR>
+"Basically you press * or # to search for the current selection !! Really useful
+vnoremap <silent>* :call VisualSearch('f')<CR>
+vnoremap <silent># :call VisualSearch('b')<CR>
 
 
 
@@ -225,11 +207,11 @@ set showcmd
 ""map <space> /
 ""map <c-space> ?
 
-""Smart way to move btw. windows
-"nmap <C-j> <C-W>j
-"nmap <C-k> <C-W>k
-"nmap <C-h> <C-W>h
-"nmap <C-l> <C-W>l
+"Smart way to move btw. windows
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
 
 
 
@@ -247,6 +229,67 @@ set showcmd
 ""  <Leader>cc:              jump to table of contents of the C-reference manual 
 ""                           Memory aid cc: (c)-reference (c)ontents 
 
+
+""""""""""""""""""""""""""""
+"自动补齐括号等
+""""""""""""""""""""""""""""
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {<CR>}<Esc>O
+autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=CloseBracket()<CR>
+inoremap " <c-r>=QuoteDelim('"')<CR>
+inoremap ' <c-r>=QuoteDelim("'")<CR>
+
+function ClosePair(char)
+ if getline('.')[col('.') - 1] == a:char
+ return "\<Right>"
+ else
+ return a:char
+ endif
+endf
+
+function CloseBracket()
+ if match(getline(line('.') + 1), '\s*}') < 0
+ return "\<CR>}"
+ else
+ return "\<Esc>j0f}a"
+ endif
+endf
+
+function QuoteDelim(char)
+ let line = getline('.')
+ let col = col('.')
+ if line[col - 2] == "\\"
+ "Inserting a quoted quotation mark into the string
+ return a:char
+ elseif line[col - 1] == a:char
+ "Escaping out of the string
+ return "\<Right>"
+ else
+ "Starting a string
+ return a:char.a:char."\<Esc>i"
+ endif
+endf
+
+
+""""""""""""""""""""""""""""""
+" indent guides
+""""""""""""""""""""""""""""""
+"<leader>ig
+let g:indent_guides_indent_levels = 4
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+
+""""""""""""""""""""""""""""""
+" ShowFunc
+""""""""""""""""""""""""""""""
+map <leader>sf  <Plug>ShowFunc 
+map! <leader>sf   <Plug>ShowFunc
 
 """"""""""""""""""""""""""""""
 " tagbar
@@ -302,6 +345,7 @@ set helplang=cn             "å¸®å©ç³»ç»è®¾ç½®ä¸ºä¸­æ�
 set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
 
 autocmd FileType c,cpp  setl fdm=syntax | setl fen 
+set wildmenu
 "set foldmethod=syntax       " code fold
 "}}
 
@@ -406,10 +450,10 @@ imap <silent> ` <C-X><C-O>
 
 " Enable syntax
 if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-        \if &omnifunc == "" |
-        \  setlocal omnifunc=syntaxcomplete#Complete |
-        \endif
+autocmd Filetype *
+      \if &omnifunc == "" |
+      \  setlocal omnifunc=syntaxcomplete#Complete |
+      \endif
 endif
 
 
@@ -598,6 +642,8 @@ nmap <C-a> :AuthorInfoDetect<cr>
 """"""""""""""""""""""""""""""
 " mark setting
 """"""""""""""""""""""""""""""
+let g:mwDefaultHighlightingPalette = 'extended'
+let g:mwDefaultHighlightingNum = 9
 nmap <silent> <leader>hl <Plug>MarkSet
 vmap <silent> <leader>hl <Plug>MarkSet
 nmap <silent> <leader>hh <Plug>MarkClear
